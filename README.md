@@ -13,11 +13,12 @@ the main things of GooeyEffect is :
 1. Add TagListView and configure it
 (about how to configure TagListView see - https://github.com/ElaWorkshop/TagListView)
 NOTE: we had did some changes to TagListView component - so please use our edition
+<img  width="500" src="/ReadmeSource/addTagListView.png" />
 
-<img  width="200" src="/ReadmeSource/addTagListView.png" />
 
 copy TagListView Component:
-<img  width="200" src="/ReadmeSource/copyTagListComponent.png" />
+
+<img  width="500" src="/ReadmeSource/copyTagListComponent.png" />
 
 2. add tag to the tagListView:
 ``` swift
