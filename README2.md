@@ -69,13 +69,13 @@ func gooeyAnimator(_ gooeyAnimator: GooeyAnimator, didAnimateView animatedView: 
 
 ### TIPS
 
-1. Setup animationView to initial poit before animation
-``` swift
-animationView.frame.origin = initialPoint
-``` 
-
-2. Convert all points to containerView coordinate system (self.view in example)
+1. Convert all points to containerView coordinate system (self.view in example)
 ``` swift
 let initialPoint = self.tagsTextField.superview?.convert(self.tagsTextField.frame.origin, to: self.view)
 let toPoint = self.tagListView?.convert(tagView.frame.origin, to: self.view) 
 ```
+
+2. Setup animationView to initial poiтt before animation
+``` swift
+animationView.frame.origin = initialPoint
+``` 
