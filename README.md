@@ -46,7 +46,7 @@ let animator = GooeyAnimator.addAnimation(toContainerView: self.view, animateVie
 animator.delegate = self
 ``` 
 
-4. GooeyAnimatorDelegate - you can follow events in GooeyAnimator class in functions:
+5. GooeyAnimatorDelegate - you can follow events in GooeyAnimator class in functions:
 ``` swift
 //MARK: GooeyAnimatorDelegate
 
