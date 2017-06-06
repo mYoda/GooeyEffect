@@ -2,7 +2,7 @@
 
 ### DEMO
 
-<img  width="200" src="/ReadmeSource/GooeyEffectDemo_.gif" />
+<img  width="200" src="/ReadmeSource/gooeyDemo_356_200.gif" />
 
 ### USAGE
 **1. Create GooeyAnimator instance**
@@ -79,3 +79,6 @@ let toPoint = self.tagListView?.convert(tagView.frame.origin, to: self.view)
 ``` swift
 animationView.frame.origin = initialPoint
 ``` 
+
+That's it! join to GooeyEffect!
+
