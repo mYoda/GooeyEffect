@@ -5,7 +5,7 @@
 
 main things:
 
- - the main things of GooeyEffect is to add movement of the some UIView from startPosition(initialPoint) to the endPosition(toPoint) with special GooeyEffect
+ - the main things of GooeyEffect is to add movement to some UIView from startPosition(initialPoint) to the endPosition(toPoint) with special GooeyEffect
  - all actions should be happens in a specified containerView (UIView) while animating, so the startPosition/endPosition points should be converted to coordinate system of the containerView before animation will be started
  - an additional shapeLayer from GooeyEffectView class will be redrawn each time when animationView will be moved while animating
  - in our DemoApp the endPosition is automatically calculating in TagListView class. we just get this point from the TagView for converting to coordinate system of containerView and pass it to GooeyAnimator
@@ -23,7 +23,7 @@ and copy TagListView Component:
 
 <img  width="500" src="/ReadmeSource/copyTagListComponent.png" />
 
-2. add new tag to tagListView (this view will be setted invisible before animation and visible right animation did end):
+2. add new tag to tagListView (this view will be setted invisible before animation will be started and rewert to visible right after animation did end):
 
 ``` swift
 // 1 - add new tag to tagListView (this view will be unvisible)
@@ -46,7 +46,7 @@ let animator = GooeyAnimator.addAnimation(toContainerView: self.view, animateVie
 animator.delegate = self
 ``` 
 
-5. GooeyAnimatorDelegate - you can follow events in GooeyAnimator class in functions:
+5. GooeyAnimatorDelegate - you can follow events from GooeyAnimator class in the next functions:
 ``` swift
 //MARK: GooeyAnimatorDelegate
 
