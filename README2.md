@@ -1,73 +1,81 @@
 # GooeyEffect
 
-### Demo
+### DEMO
+
 <img  width="200" src="/ReadmeSource/GooeyEffectDemo_.gif" />
 
-
-main things:
-
- - the main things of GooeyEffect is to add movement to some UIView from startPosition(initialPoint) to the endPosition(toPoint) with special GooeyEffect
- - all actions should be happens in a specified containerView (UIView) while animating, so the startPosition/endPosition points should be converted to coordinate system of the containerView before animation will be started
- - an additional shapeLayer from GooeyEffectView class will be redrawn each time when animationView will be moved while animating
- - in our DemoApp the endPosition is automatically calculating in TagListView class. we just get this point from the TagView for converting to coordinate system of containerView and pass it to GooeyAnimator
-
-this image illustrated about views that used in GooeyAnimator class:
-
-<img  width="250" src="/ReadmeSource/createGooeyAnimator.png" />
-
-
 ### USAGE
-
-1. Add TagListView and configure it
-(about how to configure TagListView see - https://github.com/ElaWorkshop/TagListView)
-NOTE: we had did some changes to TagListView component - so please use our edition if you wants to have the same idea of usage GooeyEffect
-
-<img  width="500" src="/ReadmeSource/addTagListView.png" />
-
-and copy TagListView Component:
-
-<img  width="500" src="/ReadmeSource/copyTagListComponent.png" />
-
-2. add new tag to tagListView (this view will be setted invisible before animation will be started and rewert to visible right after animation did end):
+**1. Create GooeyAnimator instance**
 
 ``` swift
-// 1 - add new tag to tagListView (this view will be unvisible)
-        let tagViewLabel = self.tagListView.addTag(tagText)
-```
-3. prepare startPosition and endPosition - convert these points to coordinate system of containerView (in our DemoApp it is self.view)
-
-``` swift
-let initialPoint = self.tagsTextField.superview?.convert(self.tagsTextField.frame.origin, to: self.view)
-let toPoint = self.tagListView?.convert(tagView.frame.origin, to: self.view) 
-
-tagView.frame.origin = initialPoint
+let animator = GooeyAnimator.addAnimation(toContainerView: self.view, 
+                                          animateView: tagView, 
+                                          toPoint: point, 
+                                          duration: 0.8, 
+                                          baseView: self.tagsTextField)
 ``` 
 
-4. create GooeyAnimator instance and set delegate if you want to folow events
-
-``` swift
-let animator = GooeyAnimator.addAnimation(toContainerView: self.view, animateView: tagView, toPoint: toPoint, duration: 0.8, baseView: self.tagsTextField )
-
-animator.delegate = self
-``` 
-
-5. GooeyAnimatorDelegate - you can follow events from GooeyAnimator class in the next functions:
-``` swift
-//MARK: GooeyAnimatorDelegate
-
-    func onAnimation(_ actualFrame: CGRect) {
-    }
-    
-    func onStartAnimation() {
-    }
-    
-    func onStopAnimation(_ label: UILabel) {
-    }
-```
-
-6. start animation  - just call fire() method
+**2. Start animation**
+* To start gooey animation call **fire()** method
 
 ``` swift
 animator.fire()
 ``` 
 
+**3.** [Optional] **Delegate**
+* Set the delegate if you want to folow events
+
+``` swift
+{
+    animator.delegate = self
+    animator.fire()
+}
+```
+
+* You can follow events from GooeyAnimator class in the next functions:
+``` swift
+//MARK: GooeyAnimatorDelegate
+    
+func gooeyAnimatorDidStartAnimation(_ gooeyAnimator: GooeyAnimator) {
+}
+   
+func gooeyAnimator(_ gooeyAnimator: GooeyAnimator, didStopAnimateView animatedView: UIView) {
+}
+
+func gooeyAnimator(_ gooeyAnimator: GooeyAnimator, didAnimateView animatedView: UIView, toPosition position: CGPoint) {
+}
+```
+ 
+
+### NOTES
+
+ * The main things of GooeyEffect is to add movement to some UIView (animationView) from start position (initial point) to the end position (toPoint) with special GooeyEffect
+ * All actions should be happens in a specified containerView (UIView) while animating, so the initial and destination points should be converted to containerView coordinate system before animation will be started
+ * An additional shapeLayer from GooeyEffectView class will be redrawn each time when animationView will be moved while animating
+ * Initial position is taken from animationView. So it should be set before animation start
+
+
+### STRUCTURE
+
+1. Parameters
+* **containerView** - GooeyAnimator will be added to containerView with same frame (bounds)
+* **animateView** - this view will be animated with gooey effect added to it. animateView will be added to GooeyAnimator view. animateView origin position should be set to initial value in GooeyAnimator (or containerView) coordinate system
+* **toPoint** (destinationPoint) - end (final) point of gooey animation. Should be in GooeyAnimator (or containerView) coordinate system
+* **duration** - time for which animateView will be moved from initial position to destination point
+* **baseView** - this is a second view gooey effect will be applyed to. baseView is not moved by GooeyAnimator
+
+<img  width="500" src="/ReadmeSource/gooeyEffectViewsStructure.png" />
+
+
+### TIPS
+
+1. Setup animationView to initial poit before animation
+``` swift
+animationView.frame.origin = initialPoint
+``` 
+
+2. Convert all points to containerView coordinate system (self.view in example)
+``` swift
+let initialPoint = self.tagsTextField.superview?.convert(self.tagsTextField.frame.origin, to: self.view)
+let toPoint = self.tagListView?.convert(tagView.frame.origin, to: self.view) 
+``
