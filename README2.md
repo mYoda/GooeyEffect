@@ -2,7 +2,7 @@
 
 ### DEMO
 
-<img  width="200" src="/ReadmeSource/gooeyDemo_356_200.gif" />
+<img  width="250" src="/ReadmeSource/gooeyDemo_356_200.gif" />
 
 ### USAGE
 **1. Create GooeyAnimator instance**
