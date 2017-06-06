@@ -75,7 +75,7 @@ let initialPoint = self.tagsTextField.superview?.convert(self.tagsTextField.fram
 let toPoint = self.tagListView?.convert(tagView.frame.origin, to: self.view) 
 ```
 
-2. Setup animationView to initial poiтt before animation
+2. Setup animationView to initial point before animation
 ``` swift
 animationView.frame.origin = initialPoint
 ``` 
