@@ -32,48 +32,24 @@ and copy TagListView Component:
 3. prepare startPosition and endPosition - convert these points to coordinate system of containerView (in our DemoApp it is self.view)
 
 ``` swift
+let initialPoint = self.tagsTextField.superview?.convert(self.tagsTextField.frame.origin, to: self.view)
+let toPoint = self.tagListView?.convert(tagView.frame.origin, to: self.view) 
+
+tagView.frame.origin = initialPoint
 ``` 
 
-4. create GooeyAnimator instance 
+4. create GooeyAnimator instance and set delegate if you want to folow events
 
-
-3. create UILabel from TagView and pass it to GooeyAnimator. Set Up parameters and call animate() function
 ``` swift
-//
-    // animate lable movement with gooeyEffect
-    // - create visible label that contain the same parameters of TagView
-    // - pass label and tagsTextField to the GooeyAnimator
-    // - set up duration and delegate for GooeyAnimator
-    // - animate label
-    //
-    private func addAnimationToTagView(tagView: TagView) {
-        if let frame = tagView.absoluteFrame {
-            let label = UILabel(frame: frame)
-            label.text = tagView.titleLabel?.text
-            label.textAlignment = .center
-            label.font = tagView.textFont
-            label.textColor = tagView.textColor
-            label.backgroundColor = tagView.backgroundColor
-            label.layer.cornerRadius = tagView.cornerRadius
-            label.isOpaque = true
-            label.clipsToBounds = true
-            self.tagListView.addSubview(label)
-            self.tagLabels.append(label)
-            
-            let animator = GooeyAnimator(frame: self.view.frame, messageLable: label, textField: self.tagsTextField)
-            self.view.addSubview(animator)
-            animator.duration = 0.8
-            animator.delegate = self
-            
-            animator.animate()
-        }
-    }
-```
+let animator = GooeyAnimator.addAnimation(toContainerView: self.view, animateView: tagView, toPoint: toPoint, duration: 0.8, baseView: self.tagsTextField )
+
+animator.delegate = self
+``` 
 
 4. GooeyAnimatorDelegate - you can follow events in GooeyAnimator class in functions:
 ``` swift
 //MARK: GooeyAnimatorDelegate
-    
+
     func onAnimation(_ actualFrame: CGRect) {
     }
     
@@ -87,5 +63,6 @@ and copy TagListView Component:
 6. start animation  - just call fire() method
 
 ``` swift
+animator.fire()
 ``` 
 
