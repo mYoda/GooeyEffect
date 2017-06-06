@@ -3,12 +3,17 @@
 ### Demo
 <img  width="200" src="/ReadmeSource/GooeyEffectDemo_.gif" />
 
+
 main things:
 
  - the main things of GooeyEffect is to add movement to some UIView from startPosition(initialPoint) to the endPosition(toPoint) with special GooeyEffect
  - all actions should be happens in a specified containerView (UIView) while animating, so the startPosition/endPosition points should be converted to coordinate system of the containerView before animation will be started
  - an additional shapeLayer from GooeyEffectView class will be redrawn each time when animationView will be moved while animating
  - in our DemoApp the endPosition is automatically calculating in TagListView class. we just get this point from the TagView for converting to coordinate system of containerView and pass it to GooeyAnimator
+
+this image illustrated about views that used in GooeyAnimator class:
+
+<img  width="250" src="/ReadmeSource/createGooeyAnimator.png" />
 
 
 ### USAGE
